@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebShopUI.Models.ProductViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+<h2>Product list</h2>
+<form>
+    <div class="btn-group pull-right" role="group" aria-label="...">
+        @if (ViewData["datasource"].ToString() == "database")
+        {
+            <button type="button" class="btn btn-primary">Data from Database</button>
+            <button type="submit" class="btn btn-default" asp-action="ChangeDataSource">Data from Memory</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-default" asp-action="ChangeDataSource">Data from Database</button>
+            <button type="button" class="btn btn-primary">Data from Memory</button>
+        }
+    </div>
+</form>
+<p>
+    <a asp-action="Create">Create new</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
